@@ -1,0 +1,41 @@
+<!-- web component html原生组件 目前只有chrome、edge支持 ie不支持 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>webComponent</title>
+</head>
+<body>
+    <comp-html
+        title="webComponent"
+        content="55555"
+    ></comp-html>
+    <my-component title="myComponent" content="66666"></my-component>
+    <template id="comp-html">
+        <style>
+            .title{
+                color: brown;
+            }
+        </style>
+
+        <h5 class="title"></h5>
+        <div class="content"></div>
+    </template>
+</body>
+<script>
+    class CompHtml extends HTMLElement {
+      constructor() {
+        super();
+        let templateElem = document.getElementById('comp-html');
+        let content = templateElem.content.cloneNode(true);
+        content.querySelector('.title').innerText = this.getAttribute('title')
+        content.querySelector('.content').innerText = this.getAttribute('content')
+        // 原始
+        this.appendChild(content);
+      }
+    }
+    window.customElements.define('comp-html',CompHtml)
+</script>
+<script src="./myComponent.js"></script>
+</html>

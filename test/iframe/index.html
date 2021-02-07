@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <iframe 
+    id="myIframe"
+    src="http://172.17.32.46:8080/iframe.html" 
+    frameborder="0"
+    style="overflow: hidden;"
+    ></iframe> -->
+    <input type="file" id="inputFile">
+</body>
+
+<script>
+    let inputFileDom = document.getElementById('inputFile')
+    inputFileDom.onchange=async ()=>{
+        console.log(inputFileDom)
+        console.log(inputFileDom.files)
+        await fileGetBase64(inputFileDom.files[0])
+        getUrlBase64('http://172.17.32.46:8083/cdn/hot/img/preview-btn.fa5b39fb.png','png',(url)=>{
+            console.log(url)
+        })
+    }
+
+    
+    /**
+     * 通过file类型转化为base64,适用于本地。
+     */
+    async function fileGetBase64(file){
+        let readers = new FileReader();                         //新建文件阅读对象，来转意路径
+        readers.readAsDataURL(file);                           //将读取的文件路径，将路径转换为url类型    
+        readers.onload = async function() {                         //转换之后调用onload（）方法
+            let imgsSrc = this.result;                      //图片地址读出来之后result结果为 DataURL  //this.result  为图片转化的url路径
+            console.log(imgsSrc)                            //显示出来图片的url路径，可以直接赋给img的src属性
+            await imgsSrc
+        }
+    }
+
+    
+</script>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wakeApp</title>
+</head>
+<body>
+    <!-- <button onClick="wakeApp()" style="display: none;">唤醒app</button> -->
+    <button onClick="wakeApp()" id="wakeBtn">唤醒app</button>
+    <a href="" id='a'>xxx</a>
+</body>
+
+<script>
+    // const windowName = 'ckWakeApp'  + new Date().getTime()
+    const wakeBtn = document.getElementById('wakeBtn')
+    const a = document.getElementById('a')
+
+    let deviceType = getDeviceType()
+    let wakeUrl = '',downloadUrl = ''
+
+    // window.name = windowName
+    if (deviceType === 'android') {
+        wakeUrl = 'https://dls.haifurong.cn/com.szckhd.jwgly.azfanti/test.html'
+        downloadUrl = 'https://play.google.com/store/apps/details?id=com.szckhd.jwgly.azfanti'
+    }
+    if (deviceType === 'ios') {
+        wakeUrl = 'https://www.bethekingth.com/'
+        // wakeUrl = 'https://www.google.com/'
+        downloadUrl = 'https://apps.apple.com/th/app/id1460132135'
+    }
+
+
+    function wakeApp(){
+        window.open(wakeUrl)
+    }
+
+    wakeBtn.addEventListener('click',()=>{
+        alert('sss')
+        wakeApp()
+    })
+    
+    a.href = wakeUrl
+    // wakeBtn.click()
+
+    
+
+
+    /**
+     * 获取设备类型
+     * @returns {string}
+     */
+    function getDeviceType() {
+        let u = window.navigator.userAgent;
+        let isAndroid = u.indexOf('Android') > -1;
+        let isIos = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        if (isAndroid) return 'android'
+        if (isIos) return 'ios'
+        return 'pc';
+    }
+</script>
+</html>
+

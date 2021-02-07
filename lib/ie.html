@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" id='input'>
+    <!-- <script src="./index.js"></script> -->
+    <script>
+        try {
+            ActiveXObject
+        } catch (error) {
+            alert('请用ie')
+        }
+        
+        let input = document.getElementById('input')
+        let file,dirname,filename;
+        console.log(input)
+        input.addEventListener('change',function(){
+            toHtml(input.value)
+        })
+        function toHtml(file){
+            // 路径转换 成 类似 C:\Users\\ckhd\\Desktop\\html\\word\\广州青墨用户协议-20201231.docx
+            file = file.replace(/\\/g,'\\\\')
+            file = file.replace(/\\\\/,'\\')
+            console.log(file)
+
+            let index = file.lastIndexOf('\\\\')
+            let pointIndex = file.lastIndexOf('.')
+
+            let filename = file.substring(index+2,pointIndex)
+            let dirname = file.substring(0,index)
+            console.log(dirname)
+            console.log(filename)
+            var oWordApp = new ActiveXObject("Word.Application"); 
+            try {
+                var oDocument=oWordApp.Documents.Open(file);  
+                oDocument.SaveAs(dirname+'//'+filename+".html")  
+            } catch (error) {
+                oWordApp.Application.Quit();
+                console.log('error')
+            }     
+            oWordApp.Application.Quit();
+            console.log('ok')
+        }
+        // console.log('ok')
+    </script>
+</body>
+</html>   

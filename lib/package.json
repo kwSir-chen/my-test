@@ -1,0 +1,17 @@
+{
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "@rollup/plugin-node-resolve": "^11.0.1",
+    "browserify": "^17.0.0",
+    "bufferhelper": "^0.2.1",
+    "iconv-lite": "^0.6.2",
+    "rollup": "^2.36.1"
+  },
+  "dependencies": {
+    "global": "^4.4.0",
+    "loadsh": "^0.0.4"
+  },
+  "scripts": {
+    "build": "rollup -c ./bin/rollup-config.js"
+  }
+}
